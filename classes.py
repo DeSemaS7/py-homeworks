@@ -169,7 +169,7 @@ def compare_lectors(lector1, lector2):
         elif lector1.average_grade() < lector2.average_grade():
             return f"{lector2.name} {lector2.surname} учит лучше, чем {lector1.name} {lector1.surname}"
         else:
-            return "У обоих студентов одинаковая успеваемость"
+            return "У обоих лекторов одинаковые оценки"
 
 print(prepod,'\n')
 
