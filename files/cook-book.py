@@ -19,6 +19,7 @@ def make_cook_book(file):
 
 recipes = make_cook_book('recipes.txt')
 print(recipes)
+print()
 ##task2
 def get_shop_list_by_dishes(dishes, persons):
     shopping_list = {}
@@ -37,5 +38,30 @@ def get_shop_list_by_dishes(dishes, persons):
     return shopping_list
 
 pprint(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2))
+print()
 
 ##task3
+
+input_files = ["1.txt", "2.txt", "3.txt"]
+
+output_file = "sorted-files.txt"
+
+data = []
+
+for input_file in input_files:
+    with open(input_file, 'r') as file:
+        lines = file.readlines()
+        data.append((input_file, len(lines), lines))
+
+
+data.sort(key=lambda x: x[2], reverse=True)
+
+with open(output_file, 'w') as file:
+    for filename, line_count, lines in data:
+        file.write(f'{filename}\n{line_count}\n')
+        file.writelines(lines)
+        file.write('\n')
+
+with open(output_file) as file:
+    for line in file:
+        print(line.strip())
