@@ -29,7 +29,11 @@ class Student:
         else:
             result = 'не получил оценок'
         return result
+    def __lt__(self, other):
+        return self.average_grade < other.average_grade
 
+    def __gt__(self, other):
+        return self.average_grade > other.average_grade
     def __str__(self):
         return f"Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашние задания: {self.average_grade}\nКурсы в процессе изучения: {', '.join(self.courses_in_progress)}\nЗавершенные курсы: {', '.join(self.finished_courses)}"
 
@@ -60,6 +64,12 @@ class Lecturer(Mentor):
         else:
             result = 'не получил оценок'
         return result
+
+    def __lt__(self, other):
+        return self.average_grade() < other.average_grade()
+
+    def __gt__(self, other):
+        return self.average_grade() > other.average_grade()
     def __str__(self):
         return f"Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.average_grade()}"
 
@@ -155,18 +165,18 @@ def rate_lectors_course(lectors, course):
 
 def compare_students(student1, student2):
     if isinstance(student1, Student) and isinstance(student2, Student):
-        if student1.average_grade > student2.average_grade:
+        if student1 > student2:
             return f"{student1.name} {student1.surname} учится лучше, чем {student2.name} {student2.surname}"
-        elif student1.average_grade < student2.average_grade:
+        elif student1 < student2:
             return f"{student2.name} {student2.surname} учится лучше, чем {student1.name} {student1.surname}"
         else:
             return "У обоих студентов одинаковая успеваемость"
 
 def compare_lectors(lector1, lector2):
     if isinstance(lector1, Lecturer) and isinstance(lector2, Lecturer):
-        if lector1.average_grade() > lector2.average_grade():
+        if lector1 > lector2:
             return f"{lector1.name} {lector1.surname} учит лучше, чем {lector2.name} {lector2.surname}"
-        elif lector1.average_grade() < lector2.average_grade():
+        elif lector1 < lector2:
             return f"{lector2.name} {lector2.surname} учит лучше, чем {lector1.name} {lector1.surname}"
         else:
             return "У обоих лекторов одинаковые оценки"
